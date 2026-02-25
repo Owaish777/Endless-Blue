@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class SimpleBuoyancy : MonoBehaviour
 {
+    public Transform[] floatPoints;
     public float waterLevel = 0f;
     public float floatForce = 10f;
     public float damping = 0.5f;
+    public float angularDamping = 1f;
 
     private Rigidbody rb;
 
@@ -15,12 +17,17 @@ public class SimpleBuoyancy : MonoBehaviour
 
     void FixedUpdate()
     {
-        float difference = waterLevel - transform.position.y;
-
-        if (difference > 0)
+        foreach (Transform point in floatPoints)
         {
-            rb.AddForce(Vector3.up * floatForce * difference);
-            rb.AddForce(-rb.linearVelocity * damping);
+            float diff = waterLevel - point.position.y;
+
+            if (diff > 0)
+            {
+                rb.AddForceAtPosition(Vector3.up * floatForce * diff, point.position);
+            }
         }
+
+        rb.AddForce(-rb.linearVelocity * damping);
+        rb.AddTorque(-rb.angularVelocity * angularDamping);
     }
 }
