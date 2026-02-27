@@ -24,15 +24,20 @@ public class SimpleWave : MonoBehaviour
         {
             Vector3 vertex = baseVertices[i];
 
-            float wave = Mathf.Sin(
-                (vertex.x + Time.time * speed) / wavelength
-            ) * amplitude;
-
+            float wave = GetWaveHeight(vertex);
             vertex.y = wave;
             vertices[i] = vertex;
         }
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
+    }
+
+    public float GetWaveHeight(Vector3 worldPosition)
+    {
+        float wave = Mathf.Sin(
+                (worldPosition.x + Time.time * speed) / wavelength
+            ) * amplitude;
+        return wave;
     }
 }

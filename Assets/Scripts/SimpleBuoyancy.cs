@@ -3,23 +3,27 @@ using UnityEngine;
 public class SimpleBuoyancy : MonoBehaviour
 {
     public Transform[] floatPoints;
+    public GameObject water;
     public float waterLevel = 0f;
     public float floatForce = 10f;
     public float damping = 0.5f;
     public float angularDamping = 1f;
 
     private Rigidbody rb;
+    private SimpleWave simpleWave;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        simpleWave = water.GetComponent<SimpleWave>();
     }
 
     void FixedUpdate()
     {
         foreach (Transform point in floatPoints)
         {
-            float diff = waterLevel - point.position.y;
+            float waterHeight = simpleWave.GetWaveHeight(point.position);
+            float diff = waterHeight - point.position.y;
 
             if (diff > 0)
             {
