@@ -4,7 +4,6 @@ public class SimpleBuoyancy : MonoBehaviour
 {
     public Transform[] floatPoints;
     public GameObject water;
-    public float waterLevel = 0f;
     public float floatForce = 10f;
     public float damping = 0.5f;
     public float angularDamping = 1f;
