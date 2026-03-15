@@ -11,6 +11,7 @@ public class BoatController : MonoBehaviour
     public GameObject thrustPointsRight;
     public GameObject water;
     public float offset = 1f;
+    public float waterGridSize = 10f;
 
 
     private Animator animator;
@@ -88,6 +89,16 @@ public class BoatController : MonoBehaviour
                 rb.AddForceAtPosition(transform.forward * thrustForce * submersion, transform.position + new Vector3(offset, 0, 0));
             }
         }
+    }
+
+    void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+
+        pos.x = Mathf.Floor(pos.x / waterGridSize) * waterGridSize;
+        pos.z = Mathf.Floor(pos.z / waterGridSize) * waterGridSize;
+
+        water.transform.position = new Vector3(pos.x, water.transform.position.y, pos.z);
     }
 
     void HandleRowing(float rowInput)
