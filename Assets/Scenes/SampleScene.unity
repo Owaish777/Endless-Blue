@@ -1385,11 +1385,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleWave
   waves:
-  - amplitude: 0.3
+  - amplitude: 0.1
     wavelength: 10
     speed: 1.2
     direction: {x: 1, y: 0}
-  - amplitude: 0.3
+  - amplitude: 0.05
     wavelength: 8
     speed: 0.8
     direction: {x: 0.7, y: 0.7}
@@ -1530,11 +1530,12 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
-  thrustForce: 200
+  thrustForce: 500
   thrustPointsLeft: {fileID: 567661910}
   thrustPointsRight: {fileID: 1348050756}
   water: {fileID: 3617004598743442921}
-  offset: 0.2
+  leftThrustOffset: {x: -0.05, y: 0.15, z: -1.5}
+  rightThrustOffset: {x: 0.05, y: 0.15, z: -1.5}
   waterGridSize: 0.1
 --- !u!95 &5835772782293911279
 Animator:

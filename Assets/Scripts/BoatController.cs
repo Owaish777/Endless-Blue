@@ -10,7 +10,8 @@ public class BoatController : MonoBehaviour
     public GameObject thrustPointsLeft;
     public GameObject thrustPointsRight;
     public GameObject water;
-    public float offset = 1f;
+    public Vector3 leftThrustOffset = new Vector3(-1f, 0f, 0f);
+    public Vector3 rightThrustOffset = new Vector3(1f, 0f, 0f);
     public float waterGridSize = 10f;
 
 
@@ -73,7 +74,8 @@ public class BoatController : MonoBehaviour
             {
                 float submersion = Mathf.Clamp01(diff / maxSubmersionDepth);
 
-                rb.AddForceAtPosition(transform.forward * thrustForce * submersion, transform.position - new Vector3(offset , 0 , 0));
+                Vector3 worldApplyPos = transform.TransformPoint(leftThrustOffset);
+                rb.AddForceAtPosition(transform.forward * thrustForce * submersion, worldApplyPos);
             }
         }
 
@@ -86,7 +88,8 @@ public class BoatController : MonoBehaviour
             {
                 float submersion = Mathf.Clamp01(diff / maxSubmersionDepth);
 
-                rb.AddForceAtPosition(transform.forward * thrustForce * submersion, transform.position + new Vector3(offset, 0, 0));
+                Vector3 worldApplyPos = transform.TransformPoint(rightThrustOffset);
+                rb.AddForceAtPosition(transform.forward * thrustForce * submersion, worldApplyPos);
             }
         }
     }
