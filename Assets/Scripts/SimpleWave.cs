@@ -33,7 +33,8 @@ public class SimpleWave : MonoBehaviour
         {
             Vector3 vertex = baseVertices[i];
 
-            float wave = GetWaveHeight(vertex);
+            // Transform the vertex to world space
+            float wave = GetWaveHeight(transform.TransformPoint(vertex));
             vertex.y = wave;
             vertices[i] = vertex;
         }
@@ -52,6 +53,27 @@ public class SimpleWave : MonoBehaviour
         }
 
         return h;
+    }
+
+    // Returns a horizontal push vector produced by the waves at the given world position.
+    public Vector3 GetWavePush(Vector3 worldPosition)
+    {
+        Vector3 push = Vector3.zero;
+        Vector2 position = new Vector2(worldPosition.x, worldPosition.z);
+
+        foreach (GerstnerWave wave in waves)
+        {
+            Vector2 dir = wave.direction.normalized;
+            float k = 2 * Mathf.PI / wave.wavelength;
+
+            // push in the wave travel direction
+            float magnitude = wave.amplitude * k * wave.speed;
+            Vector3 force = new Vector3(dir.x, 0f, dir.y) * magnitude;
+
+            push += force;
+        }
+
+        return push;
     }
 
     float GerstnerWave(Vector2 position, GerstnerWave wave)
