@@ -1661,6 +1661,7 @@ MonoBehaviour:
   thrustPointsLeft: {fileID: 567661910}
   thrustPointsRight: {fileID: 1348050756}
   water: {fileID: 3617004598743442921}
+  cloud: {fileID: 1292865148}
   leftThrustOffset: {x: -0.05, y: 0.15, z: -1.5}
   rightThrustOffset: {x: 0.05, y: 0.15, z: -1.5}
   waterGridSize: 0.1

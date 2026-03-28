@@ -10,6 +10,7 @@ public class BoatController : MonoBehaviour
     public GameObject thrustPointsLeft;
     public GameObject thrustPointsRight;
     public GameObject water;
+    public GameObject cloud;
     public Vector3 leftThrustOffset = new Vector3(-1f, 0f, 0f);
     public Vector3 rightThrustOffset = new Vector3(1f, 0f, 0f);
     public float waterGridSize = 10f;
@@ -102,6 +103,7 @@ public class BoatController : MonoBehaviour
         pos.z = Mathf.Floor(pos.z / waterGridSize) * waterGridSize;
 
         water.transform.position = new Vector3(pos.x, water.transform.position.y, pos.z);
+        cloud.transform.position = new Vector3(pos.x, cloud.transform.position.y, pos.z);
     }
 
     void HandleRowing(float rowInput)
